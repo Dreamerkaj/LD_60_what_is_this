@@ -1,0 +1,139 @@
+[gd_scene load_steps=15 format=4 uid="uid://dpyew0upi78nr"]
+
+[ext_resource type="PackedScene" uid="uid://dn68cx7fsptqe" path="res://Scenes/Base_Scene.tscn" id="1_1pbn3"]
+[ext_resource type="Texture2D" uid="uid://c20eslo7ym66c" path="res://Sprites/papyrus.tres" id="2_d8gkh"]
+[ext_resource type="Texture2D" uid="uid://cq0fgkmmd8h4f" path="res://Sprites/background_2.png" id="3_i3ib0"]
+[ext_resource type="Texture2D" uid="uid://dj0vi1mehi2d2" path="res://Sprites/items.png" id="8_lgmj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mg3l"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(320, 128, 192, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lmuh"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(320, 288, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yddb5"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(352, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8gkh"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(352, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nv4q"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(64, 64, 288, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71yxg"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(416, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0dm1"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt1x2"]
+atlas = ExtResource("3_i3ib0")
+region = Rect2(448, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o6yb"]
+atlas = ExtResource("8_lgmj0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pbn3"]
+atlas = ExtResource("8_lgmj0")
+region = Rect2(96, 32, 32, 32)
+
+[node name="Scene_2" instance=ExtResource("1_1pbn3")]
+next_scene = "res://Scenes/Scene_3.tscn"
+max_steps = 23
+right_item_texture = ExtResource("2_d8gkh")
+can_move_tiles = Array[Vector2i]([Vector2i(3, 5)])
+item_1 = Array[Vector2i]([Vector2i(2, 4)])
+area_1 = Array[Vector2i]([Vector2i(1, 1)])
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasGroup/Node2D" index="0"]
+offset_left = 51.0
+offset_top = -5.0
+offset_right = 243.0
+offset_bottom = 59.0
+texture = SubResource("AtlasTexture_1mg3l")
+
+[node name="TileMapLayer" parent="CanvasGroup/Node2D" index="1"]
+tile_map_data = PackedByteArray("AAACAAIAAAADAAUAAAADAAIAAAADAAUAAAAEAAIAAAADAAUAAAAFAAIAAAADAAUAAAAGAAIAAAADAAUAAAAHAAIAAAADAAUAAAAHAAMAAAADAAUAAAAGAAMAAAADAAUAAAAFAAMAAAADAAUAAAAEAAMAAAADAAUAAAADAAMAAAADAAUAAAACAAMAAAADAAUAAAACAAQAAAADAAUAAAADAAQAAAADAAUAAAAEAAQAAAADAAUAAAAFAAQAAAADAAUAAAAGAAQAAAADAAUAAAAHAAQAAAADAAUAAAAIAAMAAAADAAUAAAAIAAQAAAADAAUAAAAHAAUAAAADAAUAAAAGAAUAAAADAAUAAAAFAAUAAAADAAUAAAAEAAUAAAADAAUAAAADAAUAAAADAAUAAAACAAUAAAADAAUAAAABAAQAAAADAAUAAAABAAMAAAADAAUAAAA=")
+
+[node name="TextureRect4" parent="CanvasGroup/Node2D" index="2"]
+offset_left = 19.0
+offset_top = 59.0
+offset_right = 275.0
+offset_bottom = 187.0
+texture = SubResource("AtlasTexture_4lmuh")
+
+[node name="TextureRect" parent="CanvasGroup/Node2D" index="3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -5.0
+offset_right = 82.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = SubResource("AtlasTexture_yddb5")
+
+[node name="TextureRect2" parent="CanvasGroup/Node2D" index="4"]
+offset_left = 213.0
+offset_top = -5.0
+offset_right = 245.0
+offset_bottom = 59.0
+texture = SubResource("AtlasTexture_d8gkh")
+
+[node name="Items_Areas" parent="CanvasGroup/Node2D" index="5"]
+tile_map_data = PackedByteArray("AAAFAAIAAQAAAAEAAAAIAAQAAQABAAEAAAACAAMAAQABAAAAAAAFAAMAAQAGAAAAAAAGAAIAAQACAAAAAAABAAMAAQACAAQAAAAFAAUAAQAEAAEAAAA=")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasGroup/Node2D" index="6"]
+offset_left = 8.0
+offset_top = -38.0
+offset_right = 296.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_1nv4q")
+
+[node name="TextureRect6" type="TextureRect" parent="CanvasGroup/Node2D" index="7"]
+offset_left = 130.0
+offset_top = 44.0
+offset_right = 194.0
+offset_bottom = 108.0
+texture = SubResource("AtlasTexture_71yxg")
+
+[node name="Info" parent="CanvasGroup/Wall" index="0"]
+offset_left = 288.0
+offset_top = 92.0
+offset_right = 320.0
+offset_bottom = 124.0
+texture = SubResource("AtlasTexture_b0dm1")
+
+[node name="TextureRect2" parent="CanvasGroup/Wall" index="1"]
+offset_left = 317.0
+offset_top = 88.0
+offset_right = 357.0
+offset_bottom = 128.0
+
+[node name="Hide" parent="CanvasGroup/Wall" index="2"]
+offset_left = 256.0
+offset_top = 51.0
+offset_right = 384.0
+offset_bottom = 179.0
+texture = SubResource("AtlasTexture_yt1x2")
+
+[node name="icon_item_1" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4" index="0"]
+texture = SubResource("AtlasTexture_1o6yb")
+
+[node name="icon_item_2" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4" index="1"]
+texture = SubResource("AtlasTexture_1pbn3")
+
+[node name="Character" parent="." index="3"]
+position = Vector2(399, 250)

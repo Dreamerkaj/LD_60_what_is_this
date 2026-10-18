@@ -1,0 +1,314 @@
+[gd_scene load_steps=24 format=4 uid="uid://dn68cx7fsptqe"]
+
+[ext_resource type="Script" uid="uid://budodc2y2aoyh" path="res://Scripts/Scene.gd" id="1_dxfi4"]
+[ext_resource type="Shader" uid="uid://cqcqox7pa332j" path="res://0Global/outline.gdshader" id="2_4ib2a"]
+[ext_resource type="Texture2D" uid="uid://dhywjmir11yjj" path="res://Sprites/stick.tres" id="2_dxfi4"]
+[ext_resource type="Texture2D" uid="uid://b661p87g0tufm" path="res://Sprites/corner.tres" id="3_jk5wq"]
+[ext_resource type="Texture2D" uid="uid://cq0fgkmmd8h4f" path="res://Sprites/background_2.png" id="3_lvklg"]
+[ext_resource type="Texture2D" uid="uid://bwtdc3p6crcpg" path="res://Sprites/clay.tres" id="4_i4xg2"]
+[ext_resource type="TileSet" uid="uid://2jc4cyeritay" path="res://Sprites/tile_set.tres" id="4_jk5wq"]
+[ext_resource type="Texture2D" uid="uid://b8dlh2hqxng32" path="res://Sprites/letter.tres" id="5_8vvnh"]
+[ext_resource type="TileSet" uid="uid://b5wpn1bxn162k" path="res://Sprites/items_areas.tres" id="5_i4xg2"]
+[ext_resource type="Texture2D" uid="uid://cegduipouu8or" path="res://Sprites/UI.png" id="6_8vvnh"]
+[ext_resource type="Texture2D" uid="uid://cwriujtqehvqi" path="res://Sprites/metal.tres" id="6_dcpve"]
+[ext_resource type="FontFile" uid="uid://dph4obhcx4i1s" path="res://Font/MyText2.ttf" id="7_dcpve"]
+[ext_resource type="Texture2D" uid="uid://ct2tvlhwti3ba" path="res://Sprites/gold.tres" id="7_dqybc"]
+[ext_resource type="Texture2D" uid="uid://c20eslo7ym66c" path="res://Sprites/papyrus.tres" id="8_dqybc"]
+[ext_resource type="Texture2D" uid="uid://bvqan3hicgikg" path="res://Sprites/keyboard.tres" id="9_fqa4b"]
+[ext_resource type="PackedScene" uid="uid://bcqfehc1mprrm" path="res://Scenes/Character.tscn" id="9_ot2rc"]
+[ext_resource type="Texture2D" uid="uid://dnoltsjygvcgr" path="res://Sprites/paper.tres" id="10_ot2rc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqi02"]
+shader = ExtResource("2_4ib2a")
+shader_parameter/outline_color = Color(0.9764706, 0.9254902, 0.94509804, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utmhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkl80"]
+atlas = ExtResource("3_lvklg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8lnb"]
+shader = ExtResource("2_4ib2a")
+shader_parameter/outline_color = Color(0.9764706, 0.9254902, 0.94509804, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1raot"]
+atlas = ExtResource("6_8vvnh")
+region = Rect2(256, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdqdy"]
+atlas = ExtResource("6_8vvnh")
+region = Rect2(256, 96, 32, 32)
+
+[node name="Base" type="Node2D" node_paths=PackedStringArray("map", "items_areas", "player", "step_left_txt", "icon_item_1", "icon_item_2", "q", "hide_message")]
+script = ExtResource("1_dxfi4")
+map = NodePath("CanvasGroup/Node2D/TileMapLayer")
+items_areas = NodePath("CanvasGroup/Node2D/Items_Areas")
+player = NodePath("Character")
+step_left_txt = NodePath("CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect3/CenterContainer/VBoxContainer2/Step_left")
+icon_item_1 = NodePath("CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4/icon_item_1")
+icon_item_2 = NodePath("CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4/icon_item_2")
+fake_item_texture = Dictionary[Vector2i, Texture2D]({
+Vector2i(1, 0): ExtResource("2_dxfi4"),
+Vector2i(2, 0): ExtResource("3_jk5wq"),
+Vector2i(2, 1): ExtResource("8_dqybc"),
+Vector2i(3, 0): ExtResource("4_i4xg2"),
+Vector2i(3, 1): ExtResource("10_ot2rc"),
+Vector2i(4, 0): ExtResource("5_8vvnh"),
+Vector2i(4, 1): ExtResource("9_fqa4b"),
+Vector2i(5, 0): ExtResource("6_dcpve"),
+Vector2i(6, 0): ExtResource("7_dqybc")
+})
+q = NodePath("CanvasGroup/Wall/TextureRect2")
+hide_message = NodePath("CanvasGroup/Wall/Hide")
+can_move_tiles = Array[Vector2i]([Vector2i(3, 1)])
+area_1 = Array[Vector2i]([Vector2i(0, 0)])
+fake_items = Array[Vector2i]([Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(2, 1), Vector2i(4, 1), Vector2i(3, 1)])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(640, 320)
+offset_left = -170.0
+offset_top = -204.0
+offset_right = 903.0
+offset_bottom = 594.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.11764706, 0.05882353, 0.09411765, 1)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_oqi02")
+
+[node name="Node2D" type="Node2D" parent="CanvasGroup"]
+position = Vector2(173, 75)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="CanvasGroup/Node2D"]
+position = Vector2(-13, -5)
+tile_map_data = PackedByteArray("AAACAAIAAAADAAEAAAADAAIAAAADAAEAAAAEAAIAAAADAAEAAAAFAAIAAAADAAEAAAAGAAIAAAADAAEAAAAHAAIAAAADAAEAAAAHAAMAAAADAAEAAAAGAAMAAAADAAEAAAAFAAMAAAADAAEAAAAEAAMAAAADAAEAAAADAAMAAAADAAEAAAACAAMAAAADAAEAAAACAAQAAAADAAEAAAADAAQAAAADAAEAAAAEAAQAAAADAAEAAAAFAAQAAAADAAEAAAAGAAQAAAADAAEAAAAHAAQAAAADAAEAAAACAAEAAAAFAAIAAAADAAEAAAAFAAIAAAAHAAEAAAAFAAIAAAAGAAEAAAAFAAIAAAAFAAEAAAAFAAIAAAAEAAEAAAAFAAIAAAAHAAAAAAAFAAIAAAAGAAAAAAAFAAIAAAAFAAAAAAAFAAIAAAAEAAAAAAAFAAIAAAADAAAAAAAFAAIAAAACAAAAAAAFAAIAAAA=")
+tile_set = ExtResource("4_jk5wq")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasGroup/Node2D"]
+material = SubResource("ShaderMaterial_utmhu")
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 256.0
+offset_bottom = 168.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/Node2D"]
+offset_left = 34.0
+offset_top = -19.0
+offset_right = 98.0
+offset_bottom = 45.0
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasGroup/Node2D"]
+offset_left = 196.0
+offset_top = -18.0
+offset_right = 260.0
+offset_bottom = 46.0
+flip_h = true
+
+[node name="Items_Areas" type="TileMapLayer" parent="CanvasGroup/Node2D"]
+position = Vector2(-13, -5)
+tile_map_data = PackedByteArray("AAAEAAIAAQAAAAEAAAA=")
+tile_set = ExtResource("5_i4xg2")
+
+[node name="Wall" type="Control" parent="CanvasGroup"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Info" type="TextureRect" parent="CanvasGroup/Wall"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 81.0
+offset_right = 278.0
+offset_bottom = 145.0
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasGroup/Wall"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 80.0
+offset_right = 321.0
+offset_bottom = 120.0
+texture = SubResource("AtlasTexture_bkl80")
+
+[node name="Hide" type="TextureRect" parent="CanvasGroup/Wall"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 83.0
+offset_right = 406.0
+offset_bottom = 147.0
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_y8lnb")
+
+[node name="Control" type="CenterContainer" parent="CanvasGroup2"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 180)
+offset_right = 640.0
+offset_bottom = 320.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup2/Control"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_1raot")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect3/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect3/CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "Moves"
+horizontal_alignment = 1
+
+[node name="Step_left" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect3/CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "1"
+horizontal_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_1raot")
+
+[node name="icon_item_1" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="icon_item_2" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer/TextureRect4"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="CanvasGroup2/Control/HBoxContainer"]
+custom_minimum_size = Vector2(270, 150)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_fdqdy")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/TextureRect2/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/TextureRect2/CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "Reset"
+horizontal_alignment = 1
+
+[node name="R" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/TextureRect2/CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "R"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_fdqdy")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer"]
+layout_mode = 2
+
+[node name="A" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "A"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="W" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "W"
+horizontal_alignment = 1
+
+[node name="R2" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "S"
+horizontal_alignment = 1
+
+[node name="R" type="Label" parent="CanvasGroup2/Control/HBoxContainer/VBoxContainer2/VBoxContainer/TextureRect3/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98039216, 0.92941177, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("7_dcpve")
+theme_override_font_sizes/font_size = 8
+text = "D"
+horizontal_alignment = 1
+
+[node name="Character" parent="." node_paths=PackedStringArray("map") instance=ExtResource("9_ot2rc")]
+position = Vector2(401, 218)
+map = NodePath("..")
